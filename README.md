@@ -2,7 +2,11 @@
 
 Helm chart for running `git-kb serve` as a single-replica, PVC-backed Kubernetes service.
 
-This chart intentionally does not configure authentication. Keep the Service internal-only until Gateway/OIDC or GitKB-native auth is added in a later slice.
+This chart intentionally does not configure authentication. It does expose
+`service.labels` so a parent stack can attach the Service to an Istio waypoint
+or another mesh integration without taking ownership of the Service object.
+Keep the Service internal-only until Gateway/OIDC or GitKB-native auth is added
+by the parent stack.
 
 ## Quick Start
 
