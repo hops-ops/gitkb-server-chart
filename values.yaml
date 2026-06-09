@@ -1,0 +1,85 @@
+nameOverride: ""
+fullnameOverride: ""
+
+commonLabels: {}
+
+image:
+  repository: ghcr.io/hops-ops/gitkb-server
+  tag: "0.2.12-1"
+  pullPolicy: IfNotPresent
+
+server:
+  host: 0.0.0.0
+  port: 8080
+  noEmbeddings: true
+  logFormat: json
+
+gitkb:
+  root: /data/kb
+  org: hops-ops
+  instance: knowledge-base
+  name: GitKB Knowledge Base
+
+startupCheck:
+  enabled: true
+
+seed:
+  mode: empty
+  fileName: ""
+  secretRef:
+    name: ""
+    key: ""
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  existingClaim: ""
+
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+  annotations: {}
+
+podLabels: {}
+podAnnotations: {}
+
+podSecurityContext:
+  fsGroup: 10001
+  fsGroupChangePolicy: OnRootMismatch
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 1Gi
+
+probes:
+  readiness:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 2
+    failureThreshold: 6
+  liveness:
+    initialDelaySeconds: 15
+    periodSeconds: 20
+    timeoutSeconds: 2
+    failureThreshold: 6
