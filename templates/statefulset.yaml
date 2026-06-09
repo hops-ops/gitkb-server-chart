@@ -1,3 +1,13 @@
+{{- $volumeClaimTemplateLabels := dict -}}
+{{- if and .Values.persistence.enabled (not .Values.persistence.existingClaim) -}}
+{{- $existingStatefulSet := lookup "apps/v1" "StatefulSet" .Release.Namespace (include "gitkb-server.fullname" .) -}}
+{{- if $existingStatefulSet -}}
+{{- $existingVolumeClaimTemplates := dig "spec" "volumeClaimTemplates" (list) $existingStatefulSet -}}
+{{- if gt (len $existingVolumeClaimTemplates) 0 -}}
+{{- $volumeClaimTemplateLabels = dig "metadata" "labels" (dict) (index $existingVolumeClaimTemplates 0) -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -111,12 +121,16 @@ spec:
         - name: data
           emptyDir: {}
         {{- end }}
-  {{- if and .Values.persistence.enabled (not .Values.persistence.existingClaim) }}
+{{ if and .Values.persistence.enabled (not .Values.persistence.existingClaim) }}
   volumeClaimTemplates:
     - metadata:
         name: data
         labels:
+          {{- if $volumeClaimTemplateLabels }}
+          {{- toYaml $volumeClaimTemplateLabels | nindent 10 }}
+          {{- else }}
           {{- include "gitkb-server.labels" . | nindent 10 }}
+          {{- end }}
       spec:
         accessModes:
           {{- toYaml .Values.persistence.accessModes | nindent 10 }}
@@ -127,4 +141,3 @@ spec:
           requests:
             storage: {{ .Values.persistence.size | quote }}
   {{- end }}
-
