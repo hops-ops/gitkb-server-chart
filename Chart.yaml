@@ -2,6 +2,5 @@ apiVersion: v2
 name: gitkb-server
 description: Serve a GitKB knowledge base over the GitKB sync HTTP API.
 type: application
-version: 0.1.0
+version: 0.2.0
 appVersion: "0.2.12"
-
