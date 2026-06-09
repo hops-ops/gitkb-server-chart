@@ -10,6 +10,13 @@ This chart intentionally does not configure authentication. Keep the Service int
 helm install gitkb ./xrs/charts/gitkb-server --namespace gitkb --create-namespace
 ```
 
+After release, install from the GitHub Pages chart repository:
+
+```sh
+helm repo add hops-gitkb https://hops-ops.github.io/gitkb-server-chart
+helm install gitkb hops-gitkb/gitkb-server --namespace gitkb --create-namespace
+```
+
 Then port-forward the service:
 
 ```sh

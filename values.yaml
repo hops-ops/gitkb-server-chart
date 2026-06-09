@@ -5,7 +5,7 @@ commonLabels: {}
 
 image:
   repository: ghcr.io/hops-ops/gitkb-server
-  tag: "0.2.12-1"
+  tag: "v0.1.0"
   pullPolicy: IfNotPresent
 
 server:
