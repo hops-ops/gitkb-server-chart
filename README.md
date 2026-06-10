@@ -38,6 +38,8 @@ git-kb push served 'notes/my-note'
 ## Persistence
 
 By default the chart creates a `10Gi` `ReadWriteOnce` PVC through the StatefulSet `volumeClaimTemplates`.
+On upgrade, the chart preserves any existing `volumeClaimTemplates` labels so
+chart version labels do not mutate the StatefulSet's immutable PVC template.
 
 For test-only ephemeral mode:
 
