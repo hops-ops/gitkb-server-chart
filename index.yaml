@@ -3,6 +3,16 @@ entries:
   gitkb-server:
   - apiVersion: v2
     appVersion: 0.2.12
+    created: "2026-06-10T00:30:05.363030495Z"
+    description: Serve a GitKB knowledge base over the GitKB sync HTTP API.
+    digest: a6ff7bb85fdc3b018e2b46ea08bf32ec6195c23dec4e3f6ae43d036220038ea0
+    name: gitkb-server
+    type: application
+    urls:
+    - https://hops-ops.github.io/gitkb-server-chart/gitkb-server-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 0.2.12
     created: "2026-06-09T23:32:02.842143412Z"
     description: Serve a GitKB knowledge base over the GitKB sync HTTP API.
     digest: a8d833ab3ecf9ce7280a6aa0109c2767b6bd4c4c764689a54a62a68c5491787e
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://hops-ops.github.io/gitkb-server-chart/gitkb-server-0.1.0.tgz
     version: 0.1.0
-generated: "2026-06-09T23:32:02.841510671Z"
+generated: "2026-06-10T00:30:05.362345755Z"
